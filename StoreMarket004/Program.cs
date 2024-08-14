@@ -18,7 +18,8 @@ namespace StoreMarket004
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            builder.Logging.ClearProviders();
+            builder.Logging.AddConsole();
             // Add services to the container.
             builder.Services.AddDbContext<StoreContext>(options =>
             {
@@ -34,10 +35,10 @@ namespace StoreMarket004
             //builder.Host.ConfigureContainer<ContainerBuilder>(x => x.RegisterType<ProductService>().As<IProductService>());
             builder.Services.AddMemoryCache(m => m.TrackStatistics = true);
 
-            builder.Services.AddControllers();
+           // builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+          //  builder.Services.AddSwaggerGen();
 
             var configuration = new ConfigurationBuilder();
             configuration.SetBasePath(Directory.GetCurrentDirectory())
@@ -120,7 +121,7 @@ namespace StoreMarket004
 
             app.UseAuthorization();
             app.UseAuthentication();
-            app.MapControllers();
+            //app.MapControllers();
 
             app.Run();
         }
